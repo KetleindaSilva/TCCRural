@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Principal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+  <link href="/style/style.css" rel="stylesheet">
+</head>
+
+<body class="bg-light receitas" id="receita1">
+  <form action="/buscar-anuncios" method="get" class="mb-3">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Pesquisar por título ou descrição" name="termo">
+      <button class="btn custom-button text-white" type="submit">Buscar</button>
+    </div>
+  </form>
+  <% if (termoPesquisa) { %>
+    <h2 class="fs-5">Resultados da pesquisa para "<%= termoPesquisa %>"</h2>
+    <ul>
+      <% if (anunciosPesquisa && anunciosPesquisa.length > 0) { %>
+        <div class="row">
+          <% anunciosPesquisa.forEach(anuncio => { %>
+            <div class="col-md-3 col-sm-6 col-6 p-4">
+              <div class="card custom-card text-center">
+                <img src="/<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="imgc card-img-top img-fluid" />
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= anuncio.titulo %>
+                  </h5>
+                  <a href="/anuncio/<%= anuncio.id %>" class="btn btn-danger">Ver detalhes</a>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p>Nenhum resultado encontrado.</p>
+      <% } %>
+    </ul>
+  <% } %>
+<form method="POST" class="col-md-6 d-flex" action="/principal">
+  <select  type="text" class="filtrar" name="categoria" id="categoria">
+    <option value="0">Todas as categorias</option>
+    <% categorias.forEach(categoria => { %>
+      <option type="text" class="form-control" value="<%= categoria.id %>"><%= categoria.nome %></option>
+    <% }); %>
+  </select>
+  <button class="btn custom-button text-white" type="submit">Filtrar</button>
+</form>
+
+  
+  <% if (categoriaSelecionada) { %>
+    <h2><%= categoriaSelecionadaNome %></h2>
+    <% if (anuncios && anuncios.length > 0) { %>
+      <div class="row">
+        <% anuncios.forEach(anuncio => { %>
+          <div class="col-md-3 col-sm-6 col-6">
+            <div class="card mb-3 ">
+              <img src="<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="card-img-top imgc">
+              <div class="card-body">
+                <h5 class="card-title"><%= anuncio.titulo %></h5>
+                <a href="/anuncio/<%= anuncio.id %>" class="btn btn-success">Ver Detalhes</a>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p>Não há anúncios cadastrados nesta categoria no momento.</p>
+    <% } %>
+  <% } else { %>
+    <% Object.keys(anunciosPorCategoria).forEach((categoriaId) => { %>
+      <% const categoria = anunciosPorCategoria[categoriaId]; %>
+      <% if (categoria.anuncios.length > 0) { %>
+        <h2><%= categoria.nome %></h2>
+        <div class="row mb-3">
+          <% categoria.anuncios.forEach((anuncio) => { %>
+            <div class="col-md-3 col-sm-4 col-3">
+              <div class="card mb-1">
+                <img src="<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="card-img-top imgc">
+                <div class="card-body">
+                  <h5 class="card-title "><%= anuncio.titulo %></h5>
+      
+                  <a href="/anuncio/<%= anuncio.id %>" class="btn btn-success">Ver Detalhes</a>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+    <% }}) %>
+  <% } %>
+
+  <script>
+     document.getElementById("categoria").addEventListener("change", function() {
+    const categoriaSelecionada = this.value;
+    window.location.href = `/principal?categoria=${categoriaSelecionada}`;
+  });
+  </script>
+</body>
+
+</html>

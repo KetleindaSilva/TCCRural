@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <link href="/style/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            
+            <div class="col-md-6">
+                <div class="shadow-lg p-1 mb-5 rounded pb-2 pt-2 text-center " style="color:#4ef94b;">
+                    <h3>Realize o Login</h3>
+                </div>
+                <div class="card ">
+                    <div class="card-body">
+                        
+                        <form method="post" action="/login">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="senha">Senha:</label>
+                                <input type="password" name="senha" id="senha" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn1 mt-3 text-white">Entrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Editar Anúncio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>
+  <link href="/style/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <form action="/editar-anuncio/<%= anuncio.id %>" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input type="text" class="form-control" id="titulo" name="titulo" value="<%= anuncio.titulo %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Descrição</label>
+      <textarea class="form-control" id="descricao" name="descricao" rows="4" required><%= anuncio.descricao %></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="valor" class="form-label">Valor</label>
+      <input type="text" class="form-control" id="valor" name="valor" value="<%= anuncio.valor %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="imagem" class="form-label">Imagem do Anúncio</label>
+      <input type="file" class="form-control" id="imagem" name="imagem">
+      <small class="form-text text-muted">Selecione uma nova imagem se desejar atualizar a imagem do anúncio.</small>
+    </div>
+    <div class="mb-3">
+      <label for="categoria">Categoria:</label>
+      <select id="categoria_id" name="categoria_id">
+        <option value="1">Fruta</option>
+        <option value="2">Legume</option>
+        <option value="3">Verdura</option>
+        <option value="4">Coloniais</option>
+        <option value="5">Alimento Animal</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn1 mt-3 text-white">Atualizar Anúncio</button>
+  </form>
+
+  <script>
+    
+    $('#valor').inputmask('currency', {
+      radixPoint: ',',
+      groupSeparator: '.',
+      allowMinus: false,
+      autoGroup: true,
+      rightAlign: false,
+      digits: 2,
+      prefix: 'R$', 
+      numericInput: true
+    });
+
+  </script>
+</body>
+
+</html>
