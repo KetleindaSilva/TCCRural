@@ -55,7 +55,7 @@
     <% if (anuncios && anuncios.length > 0) { %>
       <div class="row">
         <% anuncios.forEach(anuncio => { %>
-          <div class="col-md-3 col-sm-6 col-6">
+          <div class="col-md-4 col-lg-3 col-sm-6 col-6">
             <div class="card mb-3 ">
               <img src="<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="card-img-top imgc">
               <div class="card-body">
@@ -76,7 +76,7 @@
         <h2><%= categoria.nome %></h2>
         <div class="row mb-3">
           <% categoria.anuncios.forEach((anuncio) => { %>
-            <div class="col-md-3 col-sm-4 col-3">
+            <div class="col-md-4 col-lg-3 col-sm-6 col-6">
               <div class="card mb-1">
                 <img src="<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="card-img-top imgc">
                 <div class="card-body">
