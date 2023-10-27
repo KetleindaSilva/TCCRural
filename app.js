@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(expressLayouts);
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'Views'));
 
 app.use(express.static('public'));
 app.use(express.static('uploads'));

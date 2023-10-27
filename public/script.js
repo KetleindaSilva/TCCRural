@@ -23,4 +23,8 @@ document.getElementById("buscarPorCategoria").addEventListener("click", function
         console.error("Erro ao buscar receitas por categoria:", error);
       });
   });
+  $(document).ready(function() {
+    // Máscara para o campo de telefone
+    $('#contato').mask('(00) 00000-0000');
   
+  });
