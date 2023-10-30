@@ -146,24 +146,11 @@ exports.criarAnuncioPost = async (req, res) => {
   if (req.session.userId) {
     const anunciante_id = req.session.userId;
     const { titulo, descricao, valor, categoria_id, contato } = req.body;
+    const imagem = req.file.filename;
 
     try {
-      if (req.file) {
-        // Redimensionar a imagem para o tamanho desejado (400x280 pixels) e salvar na pasta "uploads".
-        await sharp(req.file.path)
-          .resize(400, 280)
-          .toFile(`./uploads/${req.file.filename}`);
-
-        // Salvar o nome do arquivo redimensionado no banco de dados.
-        const imagem = req.file.filename;
-
-        const anuncio = await Anuncio.create({ titulo, imagem, descricao, valor, categoria_id, anunciante_id, contato });
-        res.redirect('/principal');
-      } else {
-        // Lógica para criar anúncio sem imagem, se necessário.
-        const anuncio = await Anuncio.create({ titulo, descricao, valor, categoria_id, anunciante_id, contato });
-        res.redirect('/principal');
-      }
+      const anuncioId = Anuncio.create({ titulo, imagem, descricao, valor, categoria_id, anunciante_id,  contato });
+      res.redirect('/principal');
     } catch (err) {
       console.error(err);
       res.send('Erro ao criar o anúncio.');
@@ -172,6 +159,7 @@ exports.criarAnuncioPost = async (req, res) => {
     res.redirect('/login');
   }
 };
+
 
 
 exports.meusAnuncios = (req, res) => {
