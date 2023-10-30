@@ -10,11 +10,11 @@
     <div class=" mt-5">
         
       <h1 >Detalhes do Anúncio</h1>
-        <div class="row w-100 container-fluid align-self-height col-md-3 col-sm-6 col-12 mb-3">
+        <div class="row w-100 container-fluid align-self-height col-md-3 col-sm-6 col-6 mb-3">
           <div class="col-md-5 col-lg-5 col-sm-12">
             <img src="/<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class=" imgdet w-100" style="width: 100%;height:100%;">
           </div>
-          <div class="col-md-7 col-6 col-sm-12 card-text">
+          <div class="col-md-7 col-6 col-sm-12 card-text" style="max-width: 100%;">
             <h3 class="card-title pb-5"><%= anuncio.titulo %></h3>
             <h4>Descrição do Produto</h4>
             <p ><%= anuncio.descricao %></p>
@@ -29,7 +29,7 @@
     <h2 class="mt-5">Outros Anúncios do Mesmo Anunciante</h2>
     <div class="row">
       <% outrosAnuncios.forEach(function(outroAnuncio) { %>
-        <div class="col-md-3 col-sm-6 col-12 mb-3">
+        <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-3">
           <div class="card mb-3">
             <img src="/<%= outroAnuncio.imagem %>" alt="<%= outroAnuncio.titulo %>" class="card-img-top imgc">
             <div class="card-body">
