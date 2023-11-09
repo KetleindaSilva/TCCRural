@@ -111,6 +111,7 @@ img.imgdet:hover{
 }
 .filtrar{
     border-radius: 10px;
+    height: 40px;
     background-color: #8cf076;
 }
 @media (min-width: 769px) {
