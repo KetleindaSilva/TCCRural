@@ -58,11 +58,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
     <script>
     
-        $('#contato').mask('(00) 00000-0000');
+        $('#contato').mask('+00 00 00000-0000');
         $('#valor').mask('R$ 00,00', {reverse: true});
+
+    </script>
+    <script>
+        function capitalizeFirstLetter(string) {
+          return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+      
         $('#titulo, #descricao').on('blur', function() {
-            const value = $(this).val();
-            $(this).val(capitalizeFirstLetter(value));
+          const value = $(this).val();
+          $(this).val(capitalizeFirstLetter(value));
         });
     </script>
 </body>

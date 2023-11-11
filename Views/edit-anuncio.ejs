@@ -47,7 +47,17 @@
     <button type="submit" class="btn btn1 mt-3 text-white">Atualizar Anúncio</button>
   </form>
 
-  
+  <script>
+    function capitalizeFirstLetter() {
+      var input = document.getElementById('titulo','descricao');
+      var texto = input.value;
+    
+      if (texto.length > 0) {
+        var textoFormatado = texto.charAt(0).toUpperCase() + texto.slice(1).toLowerCase();
+        input.value = textoFormatado;
+      }
+    }
+    </script>
 </body>
 
 </html>
