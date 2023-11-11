@@ -78,6 +78,11 @@ h1 {
     color: #0c8805; 
     height: 9vh;
 }
+.card-title1{
+    color: #0f9d07; 
+    font-size: 35px;
+    text-shadow: 2px 2px 4px #000000;
+}
 
 .card-text {
     color: #043a04; 

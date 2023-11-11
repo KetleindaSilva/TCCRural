@@ -14,22 +14,24 @@
           <div class="col-md-5 col-lg-5 col-sm-12">
             <img src="/<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class=" imgdet w-100" style="width: 100%;height:100%;">
           </div>
-          <div class="col-md-7 col-6 col-sm-12 card-text" style="max-width: 100%;">
-            <h3 class="card-title pb-5"><%= anuncio.titulo %></h3>
+          <div class="col-md-7 col-sm-12 card-text" style="max-width: 100%;">
+            <h3 class="card-title1 pb-5 p-3"><%= anuncio.titulo %></h3>
             <h4>Descrição do Produto</h4>
             <p ><%= anuncio.descricao %></p>
-            <h4>Contato</h4>
-            <a href="https://web.whatsapp.com/anuncio.contato"></a><button>
+            <div>
+              <h4 >Contato</h4>
+            <p ><%= anuncio.contato %></p>
+            <a href="https://api.whatsapp.com/send?phone=<%= anuncio.contato %>&text=Vi%20o%20anúncio%20no%20Rural%20Market%20de%20<%= encodeURIComponent(anuncio.titulo) %>.%20Está%20disponível%3F" style="color:#fff" class="btn btn-success">Enviar mensagem no WhatsApp</a>
 
-            </button>
-            <p><%= anuncio.contato %></p>
+
+            </div>
             <h4>Valor</h4>
             <p>R$<%= anuncio.valor %></p>
        
           </div>
         </div>
     </div>
-    <h2 class="mt-5">Outros Anúncios do Mesmo Anunciante</h2>
+    <h2 class="mt-5">Outros Anúncios do Mesmo Produtor</h2>
     <div class="row">
       <% outrosAnuncios.forEach(function(outroAnuncio) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-3">
