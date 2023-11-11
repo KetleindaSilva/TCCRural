@@ -21,7 +21,7 @@
             <div>
               <h4 >Contato</h4>
             <p ><%= anuncio.contato %></p>
-            <a href="https://api.whatsapp.com/send?phone=<%= anuncio.contato %>&text=Vi%20o%20anúncio%20no%20Rural%20Market%20de%20<%= encodeURIComponent(anuncio.titulo) %>.%20Está%20disponível%3F" style="color:#fff" class="btn btn-success">Enviar mensagem no WhatsApp</a>
+            <a id="whatsappButton" href="https://api.whatsapp.com/send?phone=<%= anuncio.contato %>&text=Vi%20o%20anúncio%20no%20Rural%20Market%20de%20<%= encodeURIComponent(anuncio.titulo) %>.%20Está%20disponível%3F" style="color:#fff" class="btn btn-success">Enviar mensagem no WhatsApp</a>
 
 
             </div>
@@ -46,7 +46,13 @@
       <% }); %>
     </div>
     
-  
+    <script>
+      document.getElementById('whatsappButton').addEventListener('click', function() {
+          var numero = anuncio.contato; 
+          var numeroLimpo = numero.replace(/\D/g, ''); 
+          window.open('https://api.whatsapp.com/send?phone=' + numeroLimpo);
+      });
+      </script>
   
      
       

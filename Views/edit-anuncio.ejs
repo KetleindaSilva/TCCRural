@@ -25,6 +25,10 @@
       <label for="valor" class="form-label">Valor</label>
       <input type="text" class="form-control" id="valor" name="valor" value="<%= anuncio.valor %>" required>
     </div>
+    <div class="form-group">
+      <label for="contato">Contato:</label>
+      <input type="text" name="contato" id="contato" name="contato" class="form-control" value="<%= anuncio.contato %>" required>
+  </div>
     <div class="mb-3">
       <label for="imagem" class="form-label">Imagem do Anúncio</label>
       <input type="file" class="form-control" id="imagem" name="imagem">
@@ -43,20 +47,7 @@
     <button type="submit" class="btn btn1 mt-3 text-white">Atualizar Anúncio</button>
   </form>
 
-  <script>
-    
-    $('#valor').inputmask('currency', {
-      radixPoint: ',',
-      groupSeparator: '.',
-      allowMinus: false,
-      autoGroup: true,
-      rightAlign: false,
-      digits: 2,
-      prefix: 'R$', 
-      numericInput: true
-    });
-
-  </script>
+  
 </body>
 
 </html>
