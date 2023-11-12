@@ -121,13 +121,13 @@ img.imgdet:hover{
 }
 @media (min-width: 769px) {
     .imgdet {
-      max-width: 400px;
+      max-width: 100%;
     }
   }
 
   @media (max-width: 768px) {
     .imgdet {
-      max-width: 100%;
+      width: 30vw;
     }
   }
 
