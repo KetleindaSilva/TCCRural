@@ -129,7 +129,7 @@ exports.criarAnuncio = (req, res) => {
 async function redimensionarImagem(req) {
   if (req.file) {
     try {
-      const imagemBuffer = await sharp(req.file.path) // Use o caminho do arquivo físico em vez do buffer.
+      const imagemBuffer = await sharp(req.file.path)
         .resize(400, 280)
         .toBuffer();
       return imagemBuffer;
