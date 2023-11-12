@@ -23,7 +23,7 @@
           <% anunciosPesquisa.forEach(anuncio => { %>
             <div class="col-md-3 col-sm-6 col-6 p-4">
               <div class="card custom-card text-center">
-                <img src="/<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="imgc card-img-top img-fluid" />
+                <img src="<%=anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="imgc card-img-top img-fluid" />
                 <div class="card-body">
                   <h5 class="card-title">
                     <%= anuncio.titulo %>

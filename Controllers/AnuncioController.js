@@ -1,7 +1,7 @@
 const Anuncio = require('../Models/anuncio');
 const User = require('../Models/user');
+const cloudinary = require('../cloudinary');
 
-const sharp = require('sharp');
 
 exports.principal = (req, res) => {
   const userId = req.session.userId;
@@ -110,7 +110,7 @@ exports.filtrarPorCategoria = (req, res) => {
   });
 };
 exports.buscarNomePorId = (req, res) => {
-  const anuncianteId = req.params.anuncianteId; // Certifique-se de que você está obtendo o ID corretamente a partir dos parâmetros da rota.
+  const anuncianteId = req.params.anuncianteId; 
 
   User.buscarNomePorId(anuncianteId, (err, usuario) => {
     if (err) {
@@ -126,35 +126,38 @@ exports.criarAnuncio = (req, res) => {
   res.render('criar-anuncio');
 };
 
-async function redimensionarImagem(req) {
-  if (req.file) {
-    try {
-      const imagemBuffer = await sharp(req.file.path)
-        .resize(400, 280)
-        .toBuffer();
-      return imagemBuffer;
-    } catch (error) {
-      console.error(error);
-      throw new Error('Erro ao redimensionar a imagem.');
-    }
-  } else {
-    return null;
-  }
-}
+
 
 exports.criarAnuncioPost = async (req, res) => {
   if (req.session.userId) {
     const anunciante_id = req.session.userId;
     const { titulo, descricao, valor, categoria_id, contato } = req.body;
-    const imagem = req.file.filename;
+    const imagem = req.file.path;
 
-    try {
-      const anuncioId = Anuncio.create({ titulo, imagem, descricao, valor, categoria_id, anunciante_id,  contato });
-      res.redirect('/principal');
-    } catch (err) {
-      console.error(err);
-      res.send('Erro ao criar o anúncio.');
-    }
+    cloudinary.uploader.upload(imagem, (error, result) => {
+      if (error) {
+        console.error(error);
+        res.send('Erro ao fazer upload da imagem.');
+      } else {
+        const imagemCloudinaryURL = result.secure_url;
+
+        try {
+          const anuncioId = Anuncio.create({
+            titulo,
+            imagem: imagemCloudinaryURL, 
+            descricao,
+            valor,
+            categoria_id,
+            anunciante_id,
+            contato
+          });
+          res.redirect('/principal');
+        } catch (err) {
+          console.error(err);
+          res.send('Erro ao criar o anúncio.');
+        }
+      }
+    });
   } else {
     res.redirect('/login');
   }
