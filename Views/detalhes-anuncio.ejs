@@ -37,7 +37,7 @@
       <% outrosAnuncios.forEach(function(outroAnuncio) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-3">
           <div class="card mb-3">
-            <img src="/<%= outroAnuncio.imagem %>" alt="<%= outroAnuncio.titulo %>" class="card-img-top imgc">
+            <img src="<%= outroAnuncio.imagem %>" alt="<%= outroAnuncio.titulo %>" class="card-img-top imgc">
             <div class="card-body">
               <h5 class="card-title"style="min-height:7vh;"><%= outroAnuncio.titulo %></h5>
               <a href="/anuncio/<%= outroAnuncio.id %>" class="btn btn-success btn-block">Ver Detalhes</a>
