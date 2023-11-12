@@ -10,12 +10,12 @@
     <div class=" mt-5">
         
       <h1 >Detalhes do Anúncio</h1>
-        <div class="row w-100 container-fluid align-self-height col-md-3 col-sm-6 col-6 mb-3">
-          <div class="col-md-7  col-sm-12 align-self-center">
-            <h3 class="card-title1 pb-1 p-1"><%= anuncio.titulo %></h3>
-            <img src="/<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class=" imgdet w-100 h-50">
+        <div class="row w-100 container-fluid col-md-3 col-sm-6 col-6 mb-3 ">
+          <div class="col-md-5 col-sm-12 mt-2">
+            <h3 class="card-title1 pb-1"><%= anuncio.titulo %></h3>
+            <img src="/<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="imgdet align-self-center w-100 " style="height: max-content;">
           </div>
-          <div class="col-md-5 col-sm-12 card-text align-self-center" style="max-width: 100%;">
+          <div class="mt-2 col-md-7 col-sm-12 card-text align-self-center">
            
             <h4>Descrição do Produto</h4>
             <p ><%= anuncio.descricao %></p>
@@ -25,7 +25,7 @@
             <p ><%= anuncio.contato %></p>
             <h4>Valor</h4>
             <p>R$<%= anuncio.valor %></p>
-            <a href="https://api.whatsapp.com/send?phone=<%=anuncio.contato%>&text=Vi%20o%20anúncio%20no%20Rural%20Market%20de%20<%= encodeURIComponent(anuncio.titulo) %>.%20Está%20disponível%3F" style="color:#fff" class="btn btn-success">Enviar mensagem no WhatsApp</a>
+            <a  href="https://api.whatsapp.com/send?phone=<%=anuncio.contato%>&text=Vi%20o%20anúncio%20no%20Rural%20Market%20de%20<%= encodeURIComponent(anuncio.titulo) %>.%20Está%20disponível%3F" style="color:#fff" class="btn btn-success">Enviar mensagem no WhatsApp</a>
             </div>
             
        

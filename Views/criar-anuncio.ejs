@@ -37,6 +37,8 @@
                     <div class="form-group">
                         <label for="contato">Contato:</label>
                         <input type="text" name="contato" id="contato" class="form-control" required>
+                        <div id="contato-error" class="error-message" style="display: none;"></div>
+
                     </div>
                     <div class="mb-3">
                         <label for="categoria_id">Categoria:</label>
@@ -59,10 +61,8 @@
     <script>
     
         $('#contato').mask('+00 00 00000-0000');
-        $('#valor').mask('R$ 00,00', {reverse: true});
+        $('#valor').mask(' 0000,00', {reverse: true});
 
-    </script>
-    <script>
         function capitalizeFirstLetter(string) {
           return string.charAt(0).toUpperCase() + string.slice(1);
         }
@@ -70,6 +70,30 @@
         $('#titulo, #descricao').on('blur', function() {
           const value = $(this).val();
           $(this).val(capitalizeFirstLetter(value));
+        });
+        function validarNumeroContato(numero) {
+            const regex = /^\+\d{2} \d{2} \d{5}-\d{4}$/;
+            return regex.test(numero);
+        }
+
+        $('#contato').on('input', function() {
+            const numeroContato = $(this).val();
+            const errorField = $('#contato-error');
+
+            if (!validarNumeroContato(numeroContato)) {
+                errorField.text('Número Incompleto').show();
+            } else {
+                errorField.hide();
+            }
+        });
+
+        $('form').submit(function(event) {
+            const numeroContato = $('#contato').val();
+
+            if (!validarNumeroContato(numeroContato)) {
+                $('#contato-error').text('Número Incompleto').show();
+                event.preventDefault();
+            }
         });
     </script>
 </body>
