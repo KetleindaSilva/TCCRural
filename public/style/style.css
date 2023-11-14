@@ -98,9 +98,15 @@ h1 {
     border-color: #2abe31;
 }
 .btn2 {
+    width:50%;
     color:#1e9800;
      background-color: #34ec68;
     border-color: #11f81c;
+}
+.btne{
+    width:60%;
+    text-align: center;
+    margin-top: 2vh;
 }
 .btn2:hover {
     background-color: #09db44;

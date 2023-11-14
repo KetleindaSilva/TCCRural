@@ -12,7 +12,7 @@
       <h1 >Detalhes do Anúncio</h1>
         <div class="row w-100 container-fluid col-md-3 col-sm-6 col-6 mb-3 ">
           <div class="col-md-5 col-sm-12 mt-2">
-            <h3 class="card-title1 pb-1"><%= anuncio.titulo %></h3>
+            <h3 class="card-title1 "><%= anuncio.titulo %></h3>
             <img src="/<%= anuncio.imagem %>" alt="<%= anuncio.titulo %>" class="imgdet align-self-center w-100 " style="height: max-content;">
           </div>
           <div class="mt-2 col-md-7 col-sm-12 card-text align-self-center">
@@ -37,7 +37,7 @@
       <% outrosAnuncios.forEach(function(outroAnuncio) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-3">
           <div class="card mb-3">
-            <img src="<%= outroAnuncio.imagem %>" alt="<%= outroAnuncio.titulo %>" class="card-img-top imgc">
+            <img src="/<%= outroAnuncio.imagem %>" alt="<%= outroAnuncio.titulo %>" class="card-img-top imgc">
             <div class="card-body">
               <h5 class="card-title"style="min-height:7vh;"><%= outroAnuncio.titulo %></h5>
               <a href="/anuncio/<%= outroAnuncio.id %>" class="btn btn-success btn-block">Ver Detalhes</a>
