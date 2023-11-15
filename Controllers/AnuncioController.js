@@ -109,7 +109,6 @@ exports.filtrarPorCategoria = (req, res) => {
     });
   });
 };
-
 exports.buscarNomePorId = (req, res) => {
   const anuncianteId = req.params.anuncianteId; 
 
@@ -127,36 +126,40 @@ exports.criarAnuncio = (req, res) => {
   res.render('criar-anuncio');
 };
 
+
+
 exports.criarAnuncioPost = async (req, res) => {
-  if (req.session.userId) {
+  try {
+    if (!req.session.userId) {
+      return res.redirect('/login');
+    }
+
     const anunciante_id = req.session.userId;
     const { titulo, descricao, valor, categoria_id, contato } = req.body;
-    const imagem = req.file.filename;
 
-    try {
-      const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
-      const imagemCloudinaryURL = cloudinaryResult.secure_url;
-
-      const anuncioId = await Anuncio.create({
-        titulo,
-        imagem: imagemCloudinaryURL,
-        descricao,
-        valor,
-        categoria_id,
-        anunciante_id,
-        contato
-      });
-
-      res.redirect('/principal');
-    } catch (error) {
-      console.error(error);
-      res.send('Erro ao criar o anúncio ou fazer upload da imagem.');
+    if (!req.file) {
+      return res.status(400).send('Por favor, faça o upload de uma imagem.');
     }
-  } else {
-    res.redirect('/login');
+
+    const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
+    const imagemCloudinaryURL = cloudinaryResult.secure_url;
+
+    const anuncioId = await Anuncio.create({
+      titulo,
+      imagem: imagemCloudinaryURL,
+      descricao,
+      valor,
+      categoria_id,
+      anunciante_id,
+      contato
+    });
+
+    res.redirect('/principal');
+  } catch (error) {
+    console.error('Erro ao criar o anúncio ou fazer upload da imagem:', error);
+    res.status(500).send('Erro ao criar o anúncio ou fazer upload da imagem.');
   }
 };
-
 
 
 

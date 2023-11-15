@@ -5,6 +5,8 @@ const multer = require('multer');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const cloudinary = require('./cloudinary'); 
+const AnuncioController = require('./Controllers/AnuncioController');
+
 
 const app = express();
 const port = 3000;
@@ -35,14 +37,13 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ dest: 'uploads/' });
 
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
   next();
 });
 
-const AnuncioController = require('./Controllers/AnuncioController');
 
 app.get('/', (req, res) => {
     res.redirect('/principal');
