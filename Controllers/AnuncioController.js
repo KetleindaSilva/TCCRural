@@ -232,10 +232,13 @@ exports.editarAnuncio = (req, res) => {
 
 exports.atualizarAnuncio = async (req, res) => {
   const anuncioId = req.params.id;
-  const { titulo, descricao, valor, categoria_id,imagem, contato } = req.body;
+  const { titulo, descricao, valor, categoria_id,contato } = req.body;
 
   if (req.session.userId) {
-    Anuncio.buscarId(anuncioId, (err, anuncio) => {
+    const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
+    const imagemCloudinaryURL = cloudinaryResult.secure_url;
+
+     Anuncio.buscarId(anuncioId, (err, anuncio) => {
       if (err) {
         console.error(err);
         res.status(500).send('Erro ao buscar o anúncio.');
@@ -252,7 +255,7 @@ exports.atualizarAnuncio = async (req, res) => {
         descricao,
         valor,
         categoria_id,
-        imagem,
+        imagem : imagemCloudinaryURL,
         contato,
       };
 
