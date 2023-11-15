@@ -10,12 +10,27 @@ class Anuncio {
     this.imagem = imagem;
     this.contato = contato; 
   }
-
-  static async create({ titulo, descricao, valor, categoria_id, anunciante_id, imagem, contato }) {
-    const query = 'INSERT INTO anuncios (titulo, descricao, valor, categoria_id, anunciante_id, imagem,contato) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    return db.execute(query, [titulo, descricao, valor, categoria_id, anunciante_id, imagem, contato]);
+  static async uploadImagemCloudinary(imagemPath) {
+    try {
+      const cloudinaryResult = await cloudinary.uploader.upload(imagemPath);
+      return cloudinaryResult.secure_url;
+    } catch (error) {
+      console.error('Erro ao fazer upload da imagem para o Cloudinary:', error);
+      throw error;
+    }
   }
 
+  static async create({ titulo, descricao, valor, categoria_id, anunciante_id, imagem, contato }) {
+  try {
+    const imagemCloudinaryURL = await Anuncio.uploadImagemCloudinary(imagem);
+
+    const query = 'INSERT INTO anuncios (titulo, descricao, valor, categoria_id, anunciante_id, imagem,contato) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    return db.execute(query, [titulo, descricao, valor, categoria_id, anunciante_id, imagemCloudinaryURL, contato]);
+  } catch (error) {
+    console.error('Erro ao criar anúncio:', error);
+    throw error;
+  }
+}
   static buscarTodosAnuncios(callback) {
     const sql = 'SELECT * FROM anuncios';
     db.query(sql, (err, results) => {

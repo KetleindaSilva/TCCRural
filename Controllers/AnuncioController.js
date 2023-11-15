@@ -134,7 +134,7 @@ exports.criarAnuncioPost = async (req, res) => {
     const imagem = req.file.filename;
 
     try {
-      const cloudinaryResult = await cloudinary.uploader.upload(imagem);
+      const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
       const imagemCloudinaryURL = cloudinaryResult.secure_url;
 
       const anuncioId = await Anuncio.create({

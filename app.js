@@ -4,6 +4,7 @@ const path = require('path');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
+const cloudinary = require('./cloudinary'); 
 
 const app = express();
 const port = 3000;
@@ -42,7 +43,6 @@ app.use((req, res, next) => {
 });
 
 const AnuncioController = require('./Controllers/AnuncioController');
-
 
 app.get('/', (req, res) => {
     res.redirect('/principal');
