@@ -1,5 +1,5 @@
 const db = require('./database');
-
+const cloudinary = require('../cloudinary');
 class Anuncio {
   constructor({ titulo, descricao, valor, categoria_id, anunciante_id, imagem,  contato }) {
     this.titulo = titulo;
