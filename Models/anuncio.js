@@ -1,5 +1,6 @@
 const db = require('./database');
 const cloudinary = require('../cloudinary');
+
 class Anuncio {
   constructor({ titulo, descricao, valor, categoria_id, anunciante_id, imagem,  contato }) {
     this.titulo = titulo;
@@ -22,7 +23,7 @@ class Anuncio {
 
   static async create({ titulo, descricao, valor, categoria_id, anunciante_id, imagem, contato }) {
     const query = 'INSERT INTO anuncios (titulo, descricao, valor, categoria_id, anunciante_id, imagem,contato) VALUES (?, ?, ?, ?, ?, ?, ?)';
-    return db.execute(query, [titulo, descricao, valor, categoria_id, anunciante_id, imagemCloudinaryURL, contato]);
+    return db.execute(query, [titulo, descricao, valor, categoria_id, anunciante_id, imagem, contato]);
   } catch (error) {
     console.error('Erro ao criar anúncio:', error);
     throw error;

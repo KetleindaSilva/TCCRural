@@ -140,7 +140,7 @@ exports.criarAnuncioPost = async (req, res) => {
     if (!req.file) {
       return res.status(400).send('Por favor, faça o upload de uma imagem.');
     }
-
+    console.log(req.file);
     const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
     const imagemCloudinaryURL = cloudinaryResult.secure_url;
 
@@ -230,9 +230,9 @@ exports.editarAnuncio = (req, res) => {
   }
 };
 
-exports.atualizarAnuncio = (req, res) => {
+exports.atualizarAnuncio = async (req, res) => {
   const anuncioId = req.params.id;
-  const { titulo, descricao, valor, categoria_id, contato } = req.body;
+  const { titulo, descricao, valor, categoria_id,imagem, contato } = req.body;
 
   if (req.session.userId) {
     Anuncio.buscarId(anuncioId, (err, anuncio) => {
@@ -252,24 +252,23 @@ exports.atualizarAnuncio = (req, res) => {
         descricao,
         valor,
         categoria_id,
-        imagem: req.file ? req.file.filename : anuncio.imagem,
-        contato
+        imagem,
+        contato,
       };
 
       Anuncio.atualizar(anuncioId, updatedAnuncio, (updateErr) => {
         if (updateErr) {
           console.error(updateErr);
           res.status(500).send('Erro ao atualizar o anúncio.');
-          return;
         }
+        })
 
         res.redirect(`/anuncio/${anuncioId}`);
       });
-    });
-  } else {
+    }else {
     res.status(401).send('Você precisa estar logado para editar anúncios.');
   }
-};
+}
 
 exports.excluirAnuncio = (req, res) => {
   const anuncioId = req.params.id;
